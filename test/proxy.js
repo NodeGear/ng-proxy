@@ -59,8 +59,7 @@ describe('will test app stuff', function() {
 		app_env.save();
 
 	});
-
-
+	
 	it('should get app by domain', function(done) {
 		client.hmset('proxy:domains', {
 			"matej.me": app._id
@@ -74,29 +73,20 @@ describe('will test app stuff', function() {
 	});
 
 	it('should get process by app id', function(done) {
-		client.sadd('proxy:app_'+app._id, app_process._id, function(err) {
-			if (err) throw err;
-
-			proxy.getAppProcess(app._id, function(process) {
-				app_process._id.toString().should.be.equal(process);
-
-				done(null);
-			})
-		})
-	})
-
-	it('should get hostname and port for app process', function (done) {
 		client.hmset('proxy:app_process_'+app_process._id, {
 			hostname: '127.0.0.1',
 			port: 9001
 		}, function (err) {
 			if (err) throw err;
+		});
 
-			proxy.getAppProcessDetails(app_process._id, function(hash) {
-				hash.should.be.instanceOf(Object);
-				hash.hostname.should.be.equal('127.0.0.1');
-				hash.port.should.be.equal(9001);
-				
+		client.sadd('proxy:app_'+app._id, app_process._id, function(err) {
+			proxy.getAppProcess(app._id, function(process) {
+				process.should.be.instanceOf(Object);
+				app_process._id.toString().should.be.equal(process._id);
+				process.hostname.should.be.equal('127.0.0.1');
+				process.port.should.be.equal('9001');
+
 				done(null);
 			})
 		})
