@@ -2,6 +2,7 @@ var config = require('../lib/config');
 var ng_proxy = require('../bin/ng-proxy');
 var proxy = ng_proxy.Proxy;
 var client = ng_proxy.client;
+var fs = require('fs')
 
 var should = require('should'),
 	models = require('ng-models')
@@ -88,6 +89,27 @@ describe('will test app stuff', function() {
 				process.port.should.be.equal('9001');
 
 				done(null);
+			})
+		})
+	})
+
+	it('should add SSL cert and test that SNI Callback returns it', function(done) {
+		this.timeout(0);
+
+		var crt = fs.readFileSync(__dirname+'/../test_files/test_ssl.crt');
+		var key = fs.readFileSync(__dirname+'/../test_files/test_ssl.key');
+
+		client.hmset('proxy:app_process_'+app_process._id, {
+			'domain_ssl__crt_matej.me': crt,
+			'domain_ssl__key_matej.me': key
+		}, function(err) {
+			if (err) throw err;
+
+			proxy.SNICallback('matej.me', function(err, context) {
+				should(err).be.null;
+				should(context).be.instanceOf(Object);
+
+				done();
 			})
 		})
 	})
