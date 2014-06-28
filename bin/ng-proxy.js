@@ -12,9 +12,7 @@ var http = require('http')
 mongoose.connect(config.db, config.db_options);
 
 if (!process.env.NG_TEST) {
-	bugsnag.register("c0c7568710bb46d4bf14b3dad719dbbe", {
-
-	});
+	bugsnag.register("c0c7568710bb46d4bf14b3dad719dbbe", {});
 }
 
 var db = mongoose.connection;
@@ -25,7 +23,7 @@ db.once('open', function callback () {
 
 exports.client = redis.createClient();
 if (config.production) {
-	exports.client.auth("ahShii3ahyoo0OhJa1ooG4yoosee8me9EvahW0ae")
+	exports.client.auth(config.redis_key)
 }
 
 exports.Proxy = new (require('../lib/Proxy').Proxy)(exports);
