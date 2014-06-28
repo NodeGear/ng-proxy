@@ -24,7 +24,7 @@ db.once('open', function callback () {
 });
 
 exports.client = redis.createClient();
-if (config.env == 'production') {
+if (config.production) {
 	exports.client.auth("ahShii3ahyoo0OhJa1ooG4yoosee8me9EvahW0ae")
 }
 
