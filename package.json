@@ -15,7 +15,7 @@
     "bugsnag": "latest",
     "hiredis": "latest",
     "redis": "latest",
-    "ng-models": "git+ssh://git@git.matej.me:23/nodegear/ng-models.git",
+    "ng-models": "git+ssh://git@beta.castawaylabs.com/nodegear/ng-models.git",
     "should": "latest"
   }
 }
