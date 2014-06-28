@@ -12,7 +12,7 @@ var http = require('http')
 mongoose.connect(config.db, config.db_options);
 
 if (!process.env.NG_TEST) {
-	bugsnag.register("c0c7568710bb46d4bf14b3dad719dbbe", {});
+	bugsnag.register(config.credentials.bugsnag_key, {});
 }
 
 var db = mongoose.connection;
