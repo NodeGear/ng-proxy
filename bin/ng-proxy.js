@@ -21,7 +21,7 @@ db.once('open', function callback () {
 	console.log("Mongodb connection established")
 });
 
-exports.client = redis.createClient();
+exports.client = redis.createClient(config.credentials.redis_port, config.credentials.redis_host);
 if (config.production) {
 	exports.client.auth(config.redis_key)
 }
