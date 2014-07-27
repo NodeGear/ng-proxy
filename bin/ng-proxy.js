@@ -7,7 +7,6 @@ var http = require('http')
 	, config = require('../lib/config')
 	, bugsnag = require('bugsnag')
 	, redis = require("redis")
-	, models = require('ng-models').init(mongoose, config)
 
 mongoose.connect(config.db, config.db_options);
 

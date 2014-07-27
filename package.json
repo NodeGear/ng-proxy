@@ -11,11 +11,9 @@
     "http-proxy": "latest",
     "mongoose": "latest",
     "colors": "latest",
-    "nodemailer": "latest",
     "bugsnag": "latest",
     "hiredis": "latest",
     "redis": "latest",
-    "ng-models": "git+ssh://git@beta.castawaylabs.com/nodegear/ng-models.git",
     "should": "latest"
   }
 }
