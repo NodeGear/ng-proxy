@@ -1,6 +1,5 @@
 var http = require('http')
 	, path = require('path')
-	, mongoose = require('mongoose')
 	, fs = require('fs')
 	, util = require('util')
 	, events = require('events')
@@ -8,17 +7,9 @@ var http = require('http')
 	, bugsnag = require('bugsnag')
 	, redis = require("redis")
 
-mongoose.connect(config.db, config.db_options);
-
 if (!process.env.NG_TEST) {
 	bugsnag.register(config.credentials.bugsnag_key, {});
 }
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Mongodb Connection Error:'));
-db.once('open', function callback () {
-	console.log("Mongodb connection established")
-});
 
 exports.client = redis.createClient(config.credentials.redis_port, config.credentials.redis_host);
 if (config.production) {
