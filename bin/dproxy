@@ -1,13 +1,10 @@
-var http = require('http')
-	, path = require('path')
-	, fs = require('fs')
-	, util = require('util')
-	, events = require('events')
-	, config = require('../lib/config')
+#!/usr/local/bin/node
+
+var config = require('../lib/config')
 	, bugsnag = require('bugsnag')
 	, redis = require("redis")
 
-if (!process.env.NG_TEST) {
+if (!process.env.TEST) {
 	bugsnag.register(config.credentials.bugsnag_key, {});
 }
 
